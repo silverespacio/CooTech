@@ -13,20 +13,23 @@ Para lograr esto utilizamos las siguientes Herramientas:
    
 2. Creamos los contenedores y las iniciamos
    <p><code>docker-compose up -d</code></p>
+   
+3. Creación de Topic
+   <p><code>docker exec -it redpanda rpk topic create tran-tarjeta</code></p>
 
-3. Iniciar el procesamiento de las transacciones
+4. Iniciar el procesamiento de las transacciones
    * Archivo: formato csv con transacciones
    * Topic redpanda: tran-tarjeta
    * Frecuencia de Procesamiento: 5 segundos
    <p><code>$ py -m producer Transacciones.csv tran-tarjeta 5</code></p>
 
-4. Iniciamos la interación con el sqldb-cli
+5. Iniciamos la interación con el sqldb-cli
    <p><code>docker exec -it ksqldb-cli ksql http://ksqldb-server:8088</code></p>
 
-5. Ejecutar Script Inicial
+6. Ejecutar Script Inicial
    <p><code>RUN SCRIPT '\files\ksql_crear.sql';</code></p>
    
-6. Configurar ksqlDB para leer desde el inicio de la secuencia
+7. Configurar ksqlDB para leer desde el inicio de la secuencia
    <p><code>SET 'auto.offset.reset' = 'earliest';</code></p>
 
 8. Sentencias adicionales para la visualización de los datos
